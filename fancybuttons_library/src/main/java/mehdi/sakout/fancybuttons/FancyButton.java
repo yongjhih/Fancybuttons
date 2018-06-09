@@ -43,7 +43,7 @@ public class FancyButton extends LinearLayout {
     private int    mTextPosition       = 1;
     private int    mDefaultTextSize    = Utils.spToPx(getContext(), 15);
     private int    mDefaultTextGravity = 0x11; // Gravity.CENTER
-    private String mText               = null;
+    private CharSequence mText               = null;
 
     // # Icon Attributes
     private Drawable mIconResource = null;
@@ -328,10 +328,10 @@ public class FancyButton extends LinearLayout {
         mGhost = attrsArray.getBoolean(R.styleable.FancyButtonsAttrs_fb_ghost, mGhost);
         mUseSystemFont = attrsArray.getBoolean(R.styleable.FancyButtonsAttrs_fb_useSystemFont, mUseSystemFont);
 
-        String text = attrsArray.getString(R.styleable.FancyButtonsAttrs_fb_text);
+        CharSequence text = attrsArray.getText(R.styleable.FancyButtonsAttrs_fb_text);
 
         if (text == null) { //no fb_text attribute
-            text = attrsArray.getString(R.styleable.FancyButtonsAttrs_android_text);
+            text = attrsArray.getText(R.styleable.FancyButtonsAttrs_android_text);
         }
 
         mIconPosition = attrsArray.getInt(R.styleable.FancyButtonsAttrs_fb_iconPosition, mIconPosition);
@@ -517,7 +517,7 @@ public class FancyButton extends LinearLayout {
      *
      * @param text : Text
      */
-    public void setText(String text) {
+    public void setText(CharSeqence text) {
         text = mTextAllCaps ? text.toUpperCase() : text;
         this.mText = text;
         if (mTextView == null)
