@@ -528,6 +528,11 @@ public class FancyButton extends LinearLayout {
             mTextView.setText(text);
     }
 
+    // TODO: mTextId @StringRes
+    public void setText(int text) {
+        mTextView.setText(text);
+    }
+
     /**
      * Set the capitalization of text
      *
