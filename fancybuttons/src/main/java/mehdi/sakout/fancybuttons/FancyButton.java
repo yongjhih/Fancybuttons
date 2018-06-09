@@ -352,8 +352,10 @@ public class FancyButton extends LinearLayout {
         if (fontIcon != null)
             mFontIcon = fontIcon;
 
-        if (text != null)
-            mText = mTextAllCaps ? text.toUpperCase() : text;
+        //if (text != null) {
+        //    mText = mTextAllCaps ? text.toUpperCase() : text;
+        //}
+        mText = text;
 
         if (!isInEditMode()) {
             mIconTypeFace = iconFontFamily != null
@@ -517,8 +519,8 @@ public class FancyButton extends LinearLayout {
      *
      * @param text : Text
      */
-    public void setText(CharSeqence text) {
-        text = mTextAllCaps ? text.toUpperCase() : text;
+    public void setText(CharSequence text) {
+        //text = mTextAllCaps ? text.toUpperCase() : text;
         this.mText = text;
         if (mTextView == null)
             initializeFancyButton();
