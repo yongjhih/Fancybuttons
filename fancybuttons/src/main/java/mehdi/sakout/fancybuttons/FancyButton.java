@@ -14,9 +14,11 @@ import android.graphics.drawable.RippleDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.support.annotation.FontRes;
+import android.support.annotation.IntRange;
 import android.support.annotation.StringRes;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewOutlineProvider;
@@ -200,7 +202,7 @@ public class FancyButton extends LinearLayout {
 
         textView.setGravity(mDefaultTextGravity);
         textView.setTextColor(mEnabled ? mDefaultTextColor : mDisabledTextColor);
-        textView.setTextSize(Utils.pxToSp(getContext(), mDefaultTextSize));
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, mDefaultTextSize);
         textView.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
         if (!isInEditMode() && !mUseSystemFont) {
             textView.setTypeface(mTextTypeFace, textStyle); //we can pass null in first arg
@@ -243,11 +245,11 @@ public class FancyButton extends LinearLayout {
 
             fontIconView.setLayoutParams(iconTextViewParams);
             if (!isInEditMode()) {
-                fontIconView.setTextSize(Utils.pxToSp(getContext(), mFontIconSize));
+                fontIconView.setTextSize(TypedValue.COMPLEX_UNIT_PX, mFontIconSize);
                 fontIconView.setText(mFontIcon);
                 fontIconView.setTypeface(mIconTypeFace);
             } else {
-                fontIconView.setTextSize(Utils.pxToSp(getContext(), mFontIconSize));
+                fontIconView.setTextSize(TypedValue.COMPLEX_UNIT_PX, mFontIconSize);
                 fontIconView.setText("O");
             }
             return fontIconView;
@@ -304,8 +306,8 @@ public class FancyButton extends LinearLayout {
         // if default color is set then the icon's color is the same (the default for icon's color)
         mDefaultIconColor = attrsArray.getColor(R.styleable.FancyButtonsAttrs_fb_iconColor, mDefaultTextColor);
 
-        mDefaultTextSize = (int) attrsArray.getDimension(R.styleable.FancyButtonsAttrs_fb_textSize, mDefaultTextSize);
-        mDefaultTextSize = (int) attrsArray.getDimension(R.styleable.FancyButtonsAttrs_android_textSize, mDefaultTextSize);
+        mDefaultTextSize = attrsArray.getDimensionPixelSize(R.styleable.FancyButtonsAttrs_fb_textSize, mDefaultTextSize);
+        mDefaultTextSize = attrsArray.getDimensionPixelSize(R.styleable.FancyButtonsAttrs_android_textSize, mDefaultTextSize);
 
         mDefaultTextGravity = attrsArray.getInt(R.styleable.FancyButtonsAttrs_fb_textGravity, mDefaultTextGravity);
 
@@ -659,9 +661,17 @@ public class FancyButton extends LinearLayout {
      * @param textSize : Text Size
      */
     public void setTextSize(int textSize) {
-        this.mDefaultTextSize = Utils.spToPx(getContext(), textSize);
-        if (mTextView != null)
+        if (mTextView == null)
+            initializeFancyButton();
+        else
             mTextView.setTextSize(textSize);
+    }
+
+    public void setTextSize(@IntRange(from = TypedValue.COMPLEX_UNIT_PX, to = TypedValue.COMPLEX_UNIT_MM) int unit, int textSize) {
+        if (mTextView == null)
+            initializeFancyButton();
+        else
+            mTextView.setTextSize(unit, textSize);
     }
 
     /**
