@@ -14,6 +14,7 @@ import android.graphics.drawable.RippleDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.support.annotation.FontRes;
+import android.support.annotation.StringRes;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -204,6 +205,7 @@ public class FancyButton extends LinearLayout {
         if (!isInEditMode() && !mUseSystemFont) {
             textView.setTypeface(mTextTypeFace, textStyle); //we can pass null in first arg
         }
+        textView.setAllCaps(mTextAllCaps);
         return textView;
     }
 
@@ -335,6 +337,7 @@ public class FancyButton extends LinearLayout {
         if (text == null) { //no fb_text attribute
             text = attrsArray.getText(R.styleable.FancyButtonsAttrs_android_text);
         }
+        mText = text;
 
         mIconPosition = attrsArray.getInt(R.styleable.FancyButtonsAttrs_fb_iconPosition, mIconPosition);
 
@@ -353,10 +356,6 @@ public class FancyButton extends LinearLayout {
 
         if (fontIcon != null)
             mFontIcon = fontIcon;
-
-        if (text != null) {
-            mText = mTextAllCaps ? text.toString().toUpperCase() : text;
-        }
 
         if (!isInEditMode()) {
             mIconTypeFace = iconFontFamily != null
@@ -543,22 +542,26 @@ public class FancyButton extends LinearLayout {
         if (mTextView == null)
             initializeFancyButton();
         else
-            mTextView.setText(mTextAllCaps ? text.toString().toUpperCase() : text);
+            mTextView.setText(text);
     }
 
-    // TODO: mTextId @StringRes
-    public void setText(int text) {
-        mTextView.setText(text);
+    public void setText(@StringRes int text) {
+        if (mTextView == null)
+            initializeFancyButton();
+        else
+            mTextView.setText(text);
     }
 
     /**
      * Set the capitalization of text
      *
-     * @param textAllCaps : is text to be capitalized
+     * @param allCaps : is text to be capitalized
      */
-    public void setTextAllCaps(boolean textAllCaps) {
-        this.mTextAllCaps = textAllCaps;
-        setText(mText);
+    public void setAllCaps(boolean allCaps) {
+        if (mTextView == null)
+            initializeFancyButton();
+        else
+            this.mTextView.setAllCaps(allCaps);
     }
 
     /**
