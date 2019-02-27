@@ -12,15 +12,7 @@ import java.util.Map;
 
 public class Utils {
 
-	private static Map<String, Typeface> cachedFontMap = new HashMap<String, Typeface>();
-
-	public static int pxToSp(final Context context, final float px) {
-		return Math.round(px / context.getResources().getDisplayMetrics().scaledDensity);
-	}
-
-	public static int spToPx(final Context context, final float sp) {
-		return Math.round(sp * context.getResources().getDisplayMetrics().scaledDensity);
-	}
+	private static Map<String, Typeface> cachedFontMap = new HashMap<>();
 
 	public static Typeface findFont(Context context, String fontPath, String defaultFontPath){
 

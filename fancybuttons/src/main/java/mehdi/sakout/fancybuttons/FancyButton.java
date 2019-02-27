@@ -46,13 +46,13 @@ public class FancyButton extends LinearLayout {
     private int    mDefaultTextColor   = Color.WHITE;
     private int    mDefaultIconColor   = Color.WHITE;
     private int    mTextPosition       = 1;
-    private int    mDefaultTextSize    = Utils.spToPx(getContext(), 15);
+    private int    mDefaultTextSize    = 48;
     private int    mDefaultTextGravity = 0x11; // Gravity.CENTER
     private CharSequence mText               = null;
 
     // # Icon Attributes
     private Drawable mIconResource = null;
-    private int      mFontIconSize = Utils.spToPx(getContext(), 15);
+    private int      mFontIconSize = 48;
     private String   mFontIcon     = null;
     private int      mIconPosition = 1;
 
@@ -312,21 +312,21 @@ public class FancyButton extends LinearLayout {
         mDefaultTextGravity = attrsArray.getInt(R.styleable.FancyButtonsAttrs_fb_textGravity, mDefaultTextGravity);
 
         mBorderColor = attrsArray.getColor(R.styleable.FancyButtonsAttrs_fb_borderColor, mBorderColor);
-        mBorderWidth = (int) attrsArray.getDimension(R.styleable.FancyButtonsAttrs_fb_borderWidth, mBorderWidth);
+        mBorderWidth = attrsArray.getDimensionPixelSize(R.styleable.FancyButtonsAttrs_fb_borderWidth, mBorderWidth);
 
-        mRadius = (int) attrsArray.getDimension(R.styleable.FancyButtonsAttrs_fb_radius, mRadius);
+        mRadius = attrsArray.getDimensionPixelSize(R.styleable.FancyButtonsAttrs_fb_radius, mRadius);
 
-        mRadiusTopLeft = (int) attrsArray.getDimension(R.styleable.FancyButtonsAttrs_fb_radiusTopLeft, mRadius);
-        mRadiusTopRight = (int) attrsArray.getDimension(R.styleable.FancyButtonsAttrs_fb_radiusTopRight, mRadius);
-        mRadiusBottomLeft = (int) attrsArray.getDimension(R.styleable.FancyButtonsAttrs_fb_radiusBottomLeft, mRadius);
-        mRadiusBottomRight = (int) attrsArray.getDimension(R.styleable.FancyButtonsAttrs_fb_radiusBottomRight, mRadius);
+        mRadiusTopLeft = attrsArray.getDimensionPixelSize(R.styleable.FancyButtonsAttrs_fb_radiusTopLeft, mRadius);
+        mRadiusTopRight = attrsArray.getDimensionPixelSize(R.styleable.FancyButtonsAttrs_fb_radiusTopRight, mRadius);
+        mRadiusBottomLeft = attrsArray.getDimensionPixelSize(R.styleable.FancyButtonsAttrs_fb_radiusBottomLeft, mRadius);
+        mRadiusBottomRight = attrsArray.getDimensionPixelSize(R.styleable.FancyButtonsAttrs_fb_radiusBottomRight, mRadius);
 
-        mFontIconSize = (int) attrsArray.getDimension(R.styleable.FancyButtonsAttrs_fb_fontIconSize, mFontIconSize);
+        mFontIconSize = attrsArray.getDimensionPixelSize(R.styleable.FancyButtonsAttrs_fb_fontIconSize, mFontIconSize);
 
-        mIconPaddingLeft = (int) attrsArray.getDimension(R.styleable.FancyButtonsAttrs_fb_iconPaddingLeft, mIconPaddingLeft);
-        mIconPaddingRight = (int) attrsArray.getDimension(R.styleable.FancyButtonsAttrs_fb_iconPaddingRight, mIconPaddingRight);
-        mIconPaddingTop = (int) attrsArray.getDimension(R.styleable.FancyButtonsAttrs_fb_iconPaddingTop, mIconPaddingTop);
-        mIconPaddingBottom = (int) attrsArray.getDimension(R.styleable.FancyButtonsAttrs_fb_iconPaddingBottom, mIconPaddingBottom);
+        mIconPaddingLeft = attrsArray.getDimensionPixelSize(R.styleable.FancyButtonsAttrs_fb_iconPaddingLeft, mIconPaddingLeft);
+        mIconPaddingRight = attrsArray.getDimensionPixelSize(R.styleable.FancyButtonsAttrs_fb_iconPaddingRight, mIconPaddingRight);
+        mIconPaddingTop = attrsArray.getDimensionPixelSize(R.styleable.FancyButtonsAttrs_fb_iconPaddingTop, mIconPaddingTop);
+        mIconPaddingBottom = attrsArray.getDimensionPixelSize(R.styleable.FancyButtonsAttrs_fb_iconPaddingBottom, mIconPaddingBottom);
 
         mTextAllCaps = attrsArray.getBoolean(R.styleable.FancyButtonsAttrs_fb_textAllCaps, false);
         mTextAllCaps = attrsArray.getBoolean(R.styleable.FancyButtonsAttrs_android_textAllCaps, false);
@@ -756,7 +756,6 @@ public class FancyButton extends LinearLayout {
      * @param iconSize : Icon Size
      */
     public void setFontIconSize(int iconSize) {
-        this.mFontIconSize = Utils.spToPx(getContext(), iconSize);
         if (mFontIconView != null)
             mFontIconView.setTextSize(iconSize);
     }
