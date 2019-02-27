@@ -16,6 +16,7 @@ import android.os.Build;
 import android.support.annotation.FontRes;
 import android.support.annotation.IntRange;
 import android.support.annotation.StringRes;
+import android.support.annotation.StyleRes;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -123,12 +124,21 @@ public class FancyButton extends LinearLayout {
         super(context, attrs);
         this.mContext = context;
 
-        TypedArray attrsArray = context.obtainStyledAttributes(attrs, R.styleable.FancyButtonsAttrs, 0, 0);
+        setStyle(attrs);
+    }
+
+    public void setStyle(AttributeSet attrs) {
+        setStyle(this.mContext.obtainStyledAttributes(attrs, R.styleable.FancyButtonsAttrs));
+    }
+
+    public void setStyle(@StyleRes int style) {
+        setStyle(this.mContext.obtainStyledAttributes(style, R.styleable.FancyButtonsAttrs));
+    }
+
+    public void setStyle(TypedArray attrsArray) {
         initAttributesArray(attrsArray);
         attrsArray.recycle();
-
         initializeFancyButton();
-
     }
 
     /**
